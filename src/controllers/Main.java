@@ -1,32 +1,22 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-import utils.FileLogger;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
 
 import models.User;
 
+public class Main
+{
+  public static void main(String[] args) throws IOException
+  {    
+    PacemakerAPI pacemakerAPI = new PacemakerAPI();
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+    pacemakerAPI.createUser("Bart",  "Simpson", "bart@simpson.com",  "secret");
+    pacemakerAPI.createUser("Homer", "Simpson", "homer@simpson.com", "secret");
+    pacemakerAPI.createUser("Lisa",  "Simpson", "lisa@simpson.com",  "secret");
 
-
-public class Main {
-	
-	public static void main(String[] args)
-	{
-	  FileLogger logger = FileLogger.getLogger();
-	  logger.log("Creating user list");
-
-	  List<User> users = new ArrayList<User>();
-	  users.add(new User("Bart", "Simpson", "bart@simpson.com", "secret"));
-	  users.add(new User("Homer", "Simpson", "bart@simpson.com", "secret"));
-	  users.add(new User("Lisa", "Simpson", "bart@simpson.com", "secret"));
-	  System.out.println(users);
-
-	  logger.log("Finished - shutting down");
-	}
-
+    Collection<User> users = pacemakerAPI.getUsers();
+    System.out.println(users);
+  }
 }
